@@ -6,7 +6,7 @@ class Deck:
     face_cards = ["Jack", "Queen", "King", "Ace"]
     suits = ["Spades", "Clubs", "Diamonds", "Heart"]
 
-    def __init__(self, amount_of_cards=36, suits=suits, face_cards=face_cards):
+    def __init__(self, amount_of_cards = 36, suits=suits, face_cards=face_cards):
         self.cards = {}
         self.suits = suits
         for each_suit in self.suits:
@@ -47,7 +47,8 @@ class Game:
 
     def draw_card(self, player):
         drawn_card = random.choice(list(self.deck.cards))
-        player.hand.append(drawn_card)
+        player.hand.append({drawn_card : self.deck.cards[drawn_card]})
+        player.score += self.deck.cards[drawn_card]
         return player.hand
 
     #def set_score(self, player):
