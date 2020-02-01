@@ -1,8 +1,8 @@
 import random
+from pprint import pprint
 
 
 class Deck:
-
     face_cards = ["Jack", "Queen", "King", "Ace"]
     suits = ["Spades", "Clubs", "Diamonds", "Heart"]
 
@@ -10,7 +10,9 @@ class Deck:
         self.cards = {}
         self.suits = suits
         for each_suit in self.suits:
-            for card in range(2, amount_of_cards//(len(self.suits)) + 2):
+            # Setup the Ace - can be either 11 | 1
+            self.cards[f"{face_cards[3]} of {each_suit}"] = 11
+            for card in range(2, amount_of_cards // (len(self.suits)) + 2):
                 # applicable only for 36 cards decks:
                 if card > 5:
                     self.cards[f"{card} of {each_suit}"] = card
@@ -33,25 +35,28 @@ class Game:
         self.deck = deck
         self.players = players
 
-    def check_player_busted(self):
+    def check_player_busted(self, player):
         if self.player.score > 21:
-            player.status = "BUSTED"
-            return player.status
+            player.status = "busted"
+        return player.status
+
+    def
 
     def start(self):
         for player in self.players:
             player.status = "active"
+            play_round(player)
 
 
 russian_deck = Deck(36)
 player_1 = Player("Vasya")
 player_2 = Player("Kolya", 9, 7)
 
-def main():
 
+def main():
     o4ko = Game(russian_deck, player_1, player_2)
     print(player_1.name, player_1.hand)
-    print(russian_deck.cards, player_2.name, player_2.hand)
+    pprint(russian_deck.cards)
 
     for person in o4ko.players:
         print(person.hand, person.status)
@@ -59,7 +64,7 @@ def main():
     o4ko.start()
 
     for person in o4ko.players:
-        print(person.hand, person.status)
+        print(person.hand, person.score, person.status)
 
 
 if __name__ == "__main__":
