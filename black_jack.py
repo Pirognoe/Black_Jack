@@ -52,8 +52,6 @@ class Game:
         self.deck.cards.pop(drawn_card)
         return player.hand, player.score
 
-    #def set_score(self, player):
-        #for card
 
     def prompt(self, player):
         query = input("Would you like to draw a card? (Y/N) ").upper()
@@ -82,17 +80,17 @@ player_2 = Player("Kolya", 9, 27)
 
 
 def main():
-    o4ko = Game(russian_deck, player_1, player_2)
+    first_game: Game = Game(russian_deck, player_1, player_2)
     print(player_1.name, player_1.hand)
     print(russian_deck.cards)
 
-    for person in o4ko.players:
+    for person in first_game.players:
         print(person.hand, person.status)
 
-    o4ko.start()
+    first_game.start()
 
-    for person in o4ko.players:
-        print(person.name, person.hand, person.score, person.status, o4ko.check_player_busted(person))
+    for person in first_game.players:
+        print(person.name, person.hand, person.score, person.status, first_game.check_player_busted(person))
     pprint(russian_deck.cards)
 
 
