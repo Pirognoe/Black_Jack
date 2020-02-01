@@ -40,15 +40,23 @@ class Game:
             player.status = "busted"
         return player.status
 
+    def prompt(self, player):
+        query = input("Would you like to draw a card? (Y/N) ").upper()
+        if query == "N":
+            player.status = "resigned"
+        elif query == "Y":
+            self.draw_card(player)
+        else:
+            print("Invalid input, try again")
+
     def play_round(self, player):
         while player.status == "active":
-
-
+            self.prompt(player)
 
     def start(self):
         for player in self.players:
             player.status = "active"
-            #play_round(player)
+            self.play_round(player)
 
 
 russian_deck = Deck(36)
