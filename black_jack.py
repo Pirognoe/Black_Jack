@@ -22,7 +22,7 @@ class Deck:
 
 class Player:
 
-    def __init__(self, name, hand=[], score=0):
+    def __init__(self, name, hand={}, score=0):
         self.name = name
         self.hand = hand
         self.score = score
@@ -47,9 +47,10 @@ class Game:
 
     def draw_card(self, player):
         drawn_card = random.choice(list(self.deck.cards))
-        player.hand.append({drawn_card : self.deck.cards[drawn_card]})
+        player.hand.update({drawn_card : self.deck.cards[drawn_card]})
         player.score += self.deck.cards[drawn_card]
-        return player.hand
+        self.deck.cards.pop(drawn_card)
+        return player.hand, player.score
 
     #def set_score(self, player):
         #for card
@@ -60,8 +61,9 @@ class Game:
             player.status = "resigned"
         elif query == "Y":
             self.draw_card(player)
+            print(player.name, player.hand, player.score)
         else:
-            print("Invalid input, try again")
+            print("Invalid input, try again ")
 
     def play_round(self, player):
         while player.status == "active":
@@ -82,8 +84,7 @@ player_2 = Player("Kolya", 9, 27)
 def main():
     o4ko = Game(russian_deck, player_1, player_2)
     print(player_1.name, player_1.hand)
-    pprint(russian_deck.cards)
-    pprint(russian_deck.cards['10 of Clubs'])
+    print(russian_deck.cards)
 
     for person in o4ko.players:
         print(person.hand, person.status)
@@ -92,6 +93,7 @@ def main():
 
     for person in o4ko.players:
         print(person.name, person.hand, person.score, person.status, o4ko.check_player_busted(person))
+    pprint(russian_deck.cards)
 
 
 if __name__ == "__main__":
