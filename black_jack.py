@@ -35,10 +35,23 @@ class Game:
         self.deck = deck
         self.players = players
 
-    def check_player_busted(self, player):
+    @staticmethod
+    def check_player_busted(player):
+        """
+        :param player:
+        :return: player status
+        """
         if player.score > 21:
             player.status = "busted"
         return player.status
+
+    def draw_card(self, player):
+        drawn_card = random.choice(list(self.deck.cards))
+        player.hand.append(drawn_card)
+        return player.hand
+
+    #def set_score(self, player):
+        #for card
 
     def prompt(self, player):
         query = input("Would you like to draw a card? (Y/N) ").upper()
@@ -69,6 +82,7 @@ def main():
     o4ko = Game(russian_deck, player_1, player_2)
     print(player_1.name, player_1.hand)
     pprint(russian_deck.cards)
+    pprint(russian_deck.cards['10 of Clubs'])
 
     for person in o4ko.players:
         print(person.hand, person.status)
