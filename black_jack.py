@@ -36,21 +36,24 @@ class Game:
         self.players = players
 
     def check_player_busted(self, player):
-        if self.player.score > 21:
+        if player.score > 21:
             player.status = "busted"
         return player.status
 
-    def
+    def play_round(self, player):
+        while player.status == "active":
+
+
 
     def start(self):
         for player in self.players:
             player.status = "active"
-            play_round(player)
+            #play_round(player)
 
 
 russian_deck = Deck(36)
 player_1 = Player("Vasya")
-player_2 = Player("Kolya", 9, 7)
+player_2 = Player("Kolya", 9, 27)
 
 
 def main():
@@ -64,7 +67,7 @@ def main():
     o4ko.start()
 
     for person in o4ko.players:
-        print(person.hand, person.score, person.status)
+        print(person.hand, person.score, person.status, o4ko.check_player_busted(person))
 
 
 if __name__ == "__main__":
