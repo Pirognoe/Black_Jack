@@ -1,5 +1,5 @@
 import random
-
+import pprint
 
 class Deck:
 
@@ -10,6 +10,7 @@ class Deck:
         self.cards = {}
         self.suits = suits
         for each_suit in self.suits:
+            self.cards[f"{face_cards[3]} of {each_suit}"] = 11
             for card in range(2, amount_of_cards//(len(self.suits)) + 2):
                 # applicable only for 36 cards decks:
                 if card > 5:
@@ -51,7 +52,7 @@ def main():
 
     o4ko = Game(russian_deck, player_1, player_2)
     print(player_1.name, player_1.hand)
-    print(russian_deck.cards, player_2.name, player_2.hand)
+    pprint.pprint(russian_deck.cards)
 
     for person in o4ko.players:
         print(person.hand, person.status)
