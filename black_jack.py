@@ -51,7 +51,8 @@ class Game:
 
     def play_round(self, player):
         while player.status == "active":
-            self.prompt(player)
+            if self.check_player_busted(player) != "busted":
+                self.prompt(player)
 
     def start(self):
         for player in self.players:
@@ -75,7 +76,7 @@ def main():
     o4ko.start()
 
     for person in o4ko.players:
-        print(person.hand, person.score, person.status, o4ko.check_player_busted(person))
+        print(person.name, person.hand, person.score, person.status, o4ko.check_player_busted(person))
 
 
 if __name__ == "__main__":
